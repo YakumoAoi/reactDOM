@@ -3,9 +3,8 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import './index.css';
-import Welcome from './Welcome'
 
 ReactDOM.render(
-  <Welcome name="frank"/>,
+  <App/>,
   document.getElementById('root')
 )
