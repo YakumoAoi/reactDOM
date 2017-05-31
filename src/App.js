@@ -11,41 +11,48 @@ class App extends Component {
 		this.state={
 			newTodo:"test",
 			todoList:[
-				{
-					id:1,
-					title:"第一件事"
-				},
-				{
-					id:2,
-					title:"第二件事"
-				},
-				{
-					id:3,
-					title:"第三件事"
-				}
 			]
 		}
 	}
 	render() {
 		let todos=this.state.todoList.map((item,index)=>{
 			return (
-				<li>
+				<li key={index}>
 					<TodoItem todo={item}/> 
 				</li>
 			)
 		})
 		return (
-		<div className="App">
-			<h1>我的待办</h1>
-			<div className="inputWarp">
-				<TodoInput content={this.state.newTodo}/>
-			</div>
-			<ol className="inputItem">
-				{todos}
-			</ol>
-      	</div>
-    	)
-  	}
+			<div className="App">
+				<h1>我的待办</h1>
+				<div className="inputWarp">
+					<TodoInput content={this.state.newTodo} onsubmit={this.addTodo.bind(this)}/>
+				</div>
+				<ol className="inputItem">
+					{todos}
+				</ol>
+      		</div>
+		)
+	}
+	addTodo(event){
+		this.state.todoList.push({
+			id:count(),
+			title:event.target.value,
+			status:null,
+			deleted:false
+		})
+		this.setState({
+			newTodo:'',
+			todoList:this.state.todoList
+		})
+	}
 }
 
 export default App;
+
+let id=0
+
+function count(){
+	id+=1
+	return id
+}
