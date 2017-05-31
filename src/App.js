@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import 'normalize.css'
+import './reset.css'
 import './App.css';
-import todoItem from './todoItem'
-import todoInput from './todoInput'
+import TodoItem from './todoItem'
+import TodoInput from './todoInput'
 
 class App extends Component {
 	constructor(props){
@@ -28,7 +30,7 @@ class App extends Component {
 		let todos=this.state.todoList.map((item,index)=>{
 			return (
 				<li>
-					<todoItem todo={item}/> 
+					<TodoItem todo={item}/> 
 				</li>
 			)
 		})
@@ -36,10 +38,10 @@ class App extends Component {
 		<div className="App">
 			<h1>我的待办</h1>
 			<div className="inputWarp">
-				<todoInput content={this.state.newTodo}/>
+				<TodoInput content={this.state.newTodo}/>
 			</div>
-			<ol>
-				<todos/>
+			<ol className="inputItem">
+				{todos}
 			</ol>
       	</div>
     	)
