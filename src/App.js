@@ -15,10 +15,12 @@ class App extends Component {
 		}
 	}
 	render() {
-		let todos=this.state.todoList.map((item,index)=>{
-			return (
+		let todos=this.state.todoList.filter((item)=>!item.deleted)
+		.map((item,index)=>{
+			return (    //需要返回多行内容或是内容的开头和return语句不在同一行时，需要加上()来让return返回括号内数据
 				<li key={index}>
-					<TodoItem todo={item} onToggle={this.toggle.bind(this)}/> 
+					<TodoItem todo={item} onToggle={this.toggle.bind(this)}
+					onDelete={this.delete.bind(this)}/> 
 				</li>
 			)
 		})
@@ -37,6 +39,9 @@ class App extends Component {
 		)
 	}
 	addTodo(event){
+		if(!event.target.value){
+			return 0
+		}
 		this.state.todoList.push({
 			id:count(),
 			title:event.target.value,
@@ -56,6 +61,10 @@ class App extends Component {
 	}
 	toggle(event,todo){
 		todo.status = todo.status === 'completed' ? '' : 'completed'
+		this.setState(this.state)
+	}
+	delete(event,todo){
+		todo.deleted=true
 		this.setState(this.state)
 	}
 }

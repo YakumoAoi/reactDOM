@@ -10,6 +10,14 @@
     box-shadow: 0 0 2em rgba(0, 0, 0, 0.2);
 }
 
-.inputItem li {
-    margin: 8px 0;
+.inputItem {
+    margin-top: 10px;
+}
+
+.App .inputItem li:nth-child(odd) {
+    background-color: #eee;
+}
+
+.App .inputItem li:nth-child(even) {
+    background-color: transparent;
 }
