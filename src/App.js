@@ -18,7 +18,7 @@ class App extends Component {
 		let todos=this.state.todoList.map((item,index)=>{
 			return (
 				<li key={index}>
-					<TodoItem todo={item}/> 
+					<TodoItem todo={item} onToggle={this.toggle.bind(this)}/> 
 				</li>
 			)
 		})
@@ -26,7 +26,9 @@ class App extends Component {
 			<div className="App">
 				<h1>我的待办</h1>
 				<div className="inputWarp">
-					<TodoInput content={this.state.newTodo} onsubmit={this.addTodo.bind(this)}/>
+					<TodoInput content={this.state.newTodo}
+					onsubmit={this.addTodo.bind(this)}
+					onChange={this.changetitle.bind(this)}/>
 				</div>
 				<ol className="inputItem">
 					{todos}
@@ -45,6 +47,16 @@ class App extends Component {
 			newTodo:'',
 			todoList:this.state.todoList
 		})
+	}
+	changetitle(event){
+		this.setState({
+			newTodo:event.target.value,
+			todoList:this.state.todoList
+		})
+	}
+	toggle(event,todo){
+		todo.status = todo.status === 'completed' ? '' : 'completed'
+		this.setState(this.state)
 	}
 }
 
